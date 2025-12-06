@@ -78,5 +78,24 @@ git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall package/luci-a
 git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall2 package/luci-app-passwall2
 git clone --depth=1 https://github.com/vernesong/OpenClash package/luci-app-openclash
 
+# 1. 添加 Dockerman（含依赖）
+git_sparse_clone main https://github.com/lisaac/luci-app-dockerman luci-app-dockerman
+git clone --depth=1 https://github.com/lisaac/luci-lib-docker package/luci-lib-docker
+# 若项目已有旧版docker相关包，先删除避免冲突
+rm -rf feeds/packages/utils/docker-ce
+rm -rf feeds/luci/applications/luci-app-docker
+
+# 2. 添加 iStore（应用商店）
+git_sparse_clone main https://github.com/linkease/istore-ui app-store-ui
+git_sparse_clone main https://github.com/linkease/istore luci
+# 移动istore文件到正确目录（适配OpenWrt包结构）
+mv -f app-store-ui package/
+mv -f luci/luci-app-store package/
+mv -f luci/luci-lib-istore package/
+
+# 3. 补全istore依赖（部分项目可能缺失）
+git clone --depth=1 https://github.com/linkease/nas-packages-luci luci-app-nas-packages
+git clone --depth=1 https://github.com/linkease/nas-packages nas-packages
+
 ./scripts/feeds update -a
 ./scripts/feeds install -a
