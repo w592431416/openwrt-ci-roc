@@ -1,4 +1,4 @@
-# 修改默认IP & 固件名称 & 编译署名和时间
+N# 修改默认IP & 固件名称 & 编译署名和时间
 sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generate
 sed -i "s/hostname='.*'/hostname='Roc'/g" package/base-files/files/bin/config_generate
 sed -i "s#_('Firmware Version'), (L\.isObject(boardinfo\.release) ? boardinfo\.release\.description + ' / ' : '') + (luciversion || ''),# \
@@ -79,7 +79,7 @@ git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall2 package/luci-
 git clone --depth=1 https://github.com/vernesong/OpenClash package/luci-app-openclash
 
 # 1. 添加 Dockerman（含依赖）
-git_sparse_clone main https://github.com/lisaac/luci-app-dockerman luci-app-dockerman
+git clone -b master https://github.com/lisaac/luci-app-dockerman.git package/luci-app-dockerman
 git clone --depth=1 https://github.com/lisaac/luci-lib-docker package/luci-lib-docker
 # 若项目已有旧版docker相关包，先删除避免冲突
 rm -rf feeds/packages/utils/docker-ce
