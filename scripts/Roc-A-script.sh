@@ -84,7 +84,9 @@ rm -rf feeds/luci/applications/luci-app-docker
 # 添加 Dockerman（含依赖）
 git clone -b master https://github.com/lisaac/luci-app-dockerman.git package/luci-app-dockerman
 git clone --depth=1 https://github.com/lisaac/luci-lib-docker package/luci-lib-docker
-
+# iStore
+git_sparse_clone main https://github.com/linkease/istore-ui app-store-ui
+git_sparse_clone main https://github.com/linkease/istore luci
 
 ./scripts/feeds update -a
 ./scripts/feeds install -a
